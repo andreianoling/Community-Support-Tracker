@@ -46,7 +46,14 @@ const validateForm = () => {
         console.log("Donation amount field is empty.");
     }
 
-    //
+    // Validate donation date
+    const donationDateInput = document.getElementById("donation-date");
+    const donationDateContainer = document.getElementById("donation-date-container");
+    if (donationDateInput.value.trim() === ""){
+        showInputError(donationDateContainer, "Donation date is required.");
+        isValid = false;
+        console.log("Donation date field is empty.");
+    }
 
     return isValid;
 }
