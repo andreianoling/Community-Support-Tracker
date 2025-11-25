@@ -8,11 +8,9 @@
 </head>
 <body>
 
-
     <header>
-        <h1>Header</h1>
+        <h1>This is Header.</h1>
     </header>
-
 
     <nav>
         <h2>nav</h2>
@@ -22,7 +20,6 @@
         </ul>
     </nav>
 
-
     <main>
         <section class="form-section">
             <h2>Log Volunteer Hours</h2>
@@ -31,39 +28,40 @@
 
                 <!-- Charity Name -->
                 <label for="charityName">Charity Name:</label>
-                <input type="text" id="charityName" name="charityName" required 
+                <input type="text" id="charityName" name="charityName"
                        aria-label="Enter the name of the charity">
+                <span class="error" id="charityNameError"></span>
 
                 <!-- Hours Volunteered -->
                 <label for="hoursVolunteered">Hours Volunteered:</label>
-                <input type="number" id="hoursVolunteered" name="hoursVolunteered" min="0" step="0.1" required
+                <input type="number" id="hoursVolunteered" name="hoursVolunteered"
                        aria-label="Enter the number of hours volunteered">
+                <span class="error" id="hoursVolunteeredError"></span>
 
                 <!-- Date -->
                 <label for="volunteerDate">Date of Volunteering:</label>
-                <input type="date" id="volunteerDate" name="volunteerDate" required
+                <input type="date" id="volunteerDate" name="volunteerDate"
                        aria-label="Select the date of volunteering">
+                <span class="error" id="volunteerDateError"></span>
 
                 <!-- Experience Rating 1–5 -->
                 <label for="experienceRating">Experience Rating (1–5):</label>
-                <input type="number" id="experienceRating" name="experienceRating" min="1" max="5" required
+                <input type="number" id="experienceRating" name="experienceRating"
                        aria-label="Rate your volunteer experience from 1 to 5">
+                <span class="error" id="experienceRatingError"></span>
 
                 <button type="submit" aria-label="Submit volunteer hours record">Add Volunteer Record</button>
 
-                <!-- Placeholder for validation messages -->
-                <p id="errorMessage" class="error"></p>
             </form>
         </section>
     </main>
 
-
     <footer>
-
+        <p>This is footer.</p>
     </footer>
 
     <!-- Stage One JavaScript file -->
-    <script src="volunteer_hours.js"></script>
+    <script src="styles_part_2.js"></script>
 
 </body>
 </html>
