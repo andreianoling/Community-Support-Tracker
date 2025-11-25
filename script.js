@@ -37,5 +37,16 @@ const validateForm = () => {
         console.log("Charity name field is empty.");
     }
 
+    // Validate donation amount
+    const donationAmountInput = document.getElementById("donation-amount");
+    const donationAmountContainer = document.getElementById("donation-amount-container");
+    if (donationAmountInput.value.trim() === ""){
+        showInputError(donationAmountContainer, "Donation amount is required.");
+        isValid = false;
+        console.log("Donation amount field is empty.");
+    }
+
+    //
+
     return isValid;
 }
