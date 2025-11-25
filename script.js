@@ -23,3 +23,19 @@ form.addEventListener("submit", (event) =>{
 
 })
 
+// Form validation function
+const validateForm = () => {
+
+    let isValid = true;
+
+    // Validate charity name
+    const charityNameInput = document.getElementById("charity-name");
+    const charityNameContainer = document.getElementById("charity-name-container");
+    if (charityNameInput.value.trim() === ""){
+        showInputError(charityNameContainer, "Charity name is required.");
+        isValid = false;
+        console.log("Charity name field is empty.");
+    }
+
+    return isValid;
+}
