@@ -55,5 +55,14 @@ const validateForm = () => {
         console.log("Donation date field is empty.");
     }
 
+    // Validate donation comment
+    const donationCommentInput = document.getElementById("donation-comment");
+    const donationCommentContainer = document.getElementById("donation-comment-container");
+    if (donationCommentInput.value.trim() === ""){
+        showInputError(donationCommentContainer, "Please leave a comment for your donation.");
+        isValid = false;
+        console.log("Donation comment field is empty.");
+    }
+
     return isValid;
 }
