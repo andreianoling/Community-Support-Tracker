@@ -45,6 +45,10 @@ const validateForm = () => {
         showInputError(donationAmountContainer, "Donation amount is required.");
         isValid = false;
         console.log("Donation amount field is empty.");
+    } else if ((donationAmountInput.value) < 0){
+        showInputError(donationAmountContainer, "Donation amount cannot be negative.");
+        isValid = false;
+        console.log("Donation amount is negative.");
     }
 
     // Validate donation date
