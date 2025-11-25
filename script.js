@@ -57,7 +57,7 @@ const validateForm = () => {
     }
 
     // Validate donation comment
-    const donationCommentInput = document.getElementById("donation-comment");
+    const donationCommentInput = document.getElementById("comment");
     const donationCommentContainer = document.getElementById("donation-comment-container");
     if (donationCommentInput.value.trim() === ""){
         showInputError(donationCommentContainer, "Please leave a comment for your donation.");
@@ -102,7 +102,7 @@ const saveDonationToLocalStorage = () => {
     donations.push(donation);
 
     // Save updated donations array to localStorage
-    localStorage.setItem("donations", JSON.stringify(donations));
+    //localStorage.setItem("donations", JSON.stringify(donations));
 
     console.log("Donation saved:", donation);
 }
