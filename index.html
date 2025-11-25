@@ -8,16 +8,20 @@
     </head>
     <body>
         <form id="donationTracker" aria-label="Donation Tracker Form">
-        <fieldset class="donation-input-container" id="charity-name">
-
-        </fieldset>
-        <fieldset class="donation-input-container" id="donation-amount">
-
-        </fieldset>
-        <fieldset class="donation-input-container" id="donation-date">
-
-        </fieldset>
-        <div class="donation-input-container" id="donation-comment">
+        <div class="donation-input-container" id="charity-name-container">
+            <label for="charity-name">Which charity did you donate to?</label>
+            <input type="text" name="charity-name" id="charity-name" aria-label="Charity Name Input">
+        </div>
+        <div class="donation-input-container" id="donation-amount-container">
+            <label for="donation-amount">How much did you donate?</label>
+            <span>$</span>
+            <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input">
+        </div>
+        <div class="donation-input-container" id="donation-date-container">
+            <label for="donation-date">When did you make the donation?</label>
+            <input type="date" name="donation-date" id="donation-date" aria-label="Donation Date Input">
+        </div>
+        <div class="donation-input-container" id="donation-comment-container">
             <label for ="comment">Leave a comment for the donation:</label>
             <input type="text" name="comment" id="comment" aria-label="Donation Comment Input">
         </div>
