@@ -1,0 +1,13 @@
+This Community Support Tracker Project is a tool to monitor our various community support initiatives. The tracker will have 2 main components, a Donation Tracker and a Volunteer Hours Tracker. 
+Group 10
+ 
+Members:
+Andrei Anoling
+Lichao Huang
+ 
+Donation Tracker: Andrei Anoling
+ 
+Volunteer Hours Tracker: Lichao Huang
+
+The Donation Tracker is an essential tool for managing PiXELL River Financial's charitable contributions. This component allows users to input and track their donations to various charities, providing a clear record of the company's philanthropic activities. The tracker not only records the amount given but also the specific charity, the date of the donation, and any personal messages or comments from the donor. By aggregating this data, the Donation Tracker can provide meaningful insights, such as total donations made over time, allowing the company to assess and showcase its impact on the community.
+The Volunteer Hours Tracker is designed to account for the volunteer work performed by PiXELL River Financial's employees. Recognizing the importance of community service, PiXELL River allows its employees to devote a certain amount of paid time off to volunteer work. Employees can log in the hours they have spent volunteering, the organizations they have helped, and their experiences. The tracker then aggregates these logs, providing a comprehensive overview of the company's volunteer efforts. This system promotes a culture of community service within the organization while also ensuring employees are recognized for their contributions.
