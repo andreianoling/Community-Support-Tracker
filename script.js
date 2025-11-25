@@ -15,8 +15,9 @@ form.addEventListener("submit", (event) =>{
 
     // unpause and submit form upon validated form
     if(validateForm()){
-        form.submit()
-        console.log("Validation successful.");
+        saveDonationToLocalStorage();
+        console.log("Validation successful. Donation saved to localStorage.");
+        form.reset();
     } else{
         console.log("Validation failed.");
     }
@@ -65,4 +66,43 @@ const validateForm = () => {
     }
 
     return isValid;
+}
+
+// Function to show input error messages
+const showInputError = (inputElement, message) => {
+    // create a span element to display the message
+    const errorDisplay = document.createElement("span");
+    errorDisplay.innerText = message;
+    errorDisplay.className = "error-message";
+    errorDisplay.setAttribute("role","alert");
+
+    inputElement.appendChild(errorDisplay);
+}
+
+// Function to save donation to localStorage
+const saveDonationToLocalStorage = () => {
+    // Get form values
+    const charityName = document.getElementById("charity-name").value.trim();
+    const donationAmount = document.getElementById("donation-amount").value.trim();
+    const donationDate = document.getElementById("donation-date").value.trim();
+    const donationComment = document.getElementById("comment").value.trim();
+
+    // Create donation object
+    const donation = {
+        charityName: charityName,
+        amount: donationAmount,
+        date: donationDate,
+        comment: donationComment,
+    };
+
+    // Get existing donations from localStorage or initialize empty array
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+
+    // Add new donation to array
+    donations.push(donation);
+
+    // Save updated donations array to localStorage
+    localStorage.setItem("donations", JSON.stringify(donations));
+
+    console.log("Donation saved:", donation);
 }
