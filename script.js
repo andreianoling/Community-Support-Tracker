@@ -110,3 +110,9 @@ const saveDonationToLocalStorage = () => {
 
     console.log("Donation saved:", donation);
 }
+
+module.exports = {
+    validateForm,
+    showInputError,
+    saveDonationToLocalStorage
+};
