@@ -1,8 +1,7 @@
-// Grab references to the donation tracker form
-const form = document.getElementById('donationTracker');
-
 // Submit function
-form.addEventListener("submit", (event) =>{
+function onSubmit(event) {
+    // Get form reference
+    const form = document.getElementById('donationTracker');
 
     // clear previous errors
     const errorMessges = document.querySelectorAll(".error-message");
@@ -22,7 +21,7 @@ form.addEventListener("submit", (event) =>{
         console.log("Validation failed.");
     }
 
-})
+}
 
 // Form validation function
 const validateForm = () => {
@@ -36,6 +35,8 @@ const validateForm = () => {
         showInputError(charityNameContainer, "Charity name is required.");
         isValid = false;
         console.log("Charity name field is empty.");
+    } else {
+        console.log("Charity name:", charityNameInput.value);
     }
 
     // Validate donation amount
@@ -49,6 +50,8 @@ const validateForm = () => {
         showInputError(donationAmountContainer, "Donation amount cannot be negative.");
         isValid = false;
         console.log("Donation amount is negative.");
+    } else {
+        console.log("Donation amount:", donationAmountInput.value);
     }
 
     // Validate donation date
@@ -58,6 +61,8 @@ const validateForm = () => {
         showInputError(donationDateContainer, "Donation date is required.");
         isValid = false;
         console.log("Donation date field is empty.");
+    } else {
+        console.log("Donation date:", donationDateInput.value);
     }
 
     // Validate donation comment
@@ -67,6 +72,8 @@ const validateForm = () => {
         showInputError(donationCommentContainer, "Please leave a comment for your donation.");
         isValid = false;
         console.log("Donation comment field is empty.");
+    } else {
+        console.log("Donation comment:", donationCommentInput.value);
     }
 
     return isValid;
@@ -111,8 +118,16 @@ const saveDonationToLocalStorage = () => {
     console.log("Donation saved:", donation);
 }
 
-module.exports = {
-    validateForm,
-    showInputError,
-    saveDonationToLocalStorage
-};
+function onPageLoadHandler() {
+	const form = document.getElementById("donationTracker");
+	if (form) {
+		form.addEventListener("submit", onSubmit);
+	}
+}
+
+// Run the handler if in a browser environment
+if (typeof window !== "undefined") {
+	window.onload = onPageLoadHandler;
+} else {
+	module.exports = { validateForm, saveDonationToLocalStorage,showInputError, onSubmit, onPageLoadHandler };
+}
