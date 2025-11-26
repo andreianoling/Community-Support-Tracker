@@ -58,3 +58,30 @@ test ("Invalid data triggers validation feedback", () => {
     expect(showInputError(charityNameContainer, "Charity name is required."));
 });
 
+test ("Identify empty field - donation amount", () => {
+    const dom = new JSDOM(
+        `<!DOCTYPE html>
+        <div class="donation-input-container" id="charity-name-container">
+            <label for="charity-name">Which charity did you donate to?</label>
+            <input type="text" name="charity-name" id="charity-name" aria-label="Charity Name Input" value="Test">
+        </div>
+        <div class="donation-input-container" id="donation-amount-container">
+            <label for="donation-amount">How much did you donate?</label>
+            <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input" value="">
+        </div>
+        <div class="donation-input-container" id="donation-date-container">
+            <label for="donation-date">When did you make the donation?</label>
+            <input type="date" name="donation-date" id="donation-date" aria-label="Donation Date Input" value="2024-06-01">
+        </div>
+        <div class="donation-input-container" id="donation-comment-container">
+            <label for ="comment">Leave a comment for the donation:</label>
+            <input type="text" name="comment" id="comment" aria-label="Donation Comment Input" value="Test comment">
+        </div>
+        `
+    );
+    global.document = dom.window.document;
+    const donationAmountInput = global.document.getElementById("donation-amount");
+    const donationAmountContainer = global.document.getElementById("donation-amount-container");
+    expect(validateForm(donationAmountInput)).toBe(false);
+    expect(showInputError(donationAmountContainer, "Donation amount is required."));
+});
