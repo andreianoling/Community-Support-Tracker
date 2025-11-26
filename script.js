@@ -37,6 +37,8 @@ const validateForm = () => {
         console.log("Charity name field is empty.");
     } else {
         console.log("Charity name:", charityNameInput.value);
+        return charityNameInput.value;
+        
     }
 
     // Validate donation amount
@@ -52,6 +54,8 @@ const validateForm = () => {
         console.log("Donation amount is negative.");
     } else {
         console.log("Donation amount:", donationAmountInput.value);
+        return donationAmountInput.value;
+        
     }
 
     // Validate donation date
@@ -63,6 +67,7 @@ const validateForm = () => {
         console.log("Donation date field is empty.");
     } else {
         console.log("Donation date:", donationDateInput.value);
+        return donationDateInput.value;
     }
 
     // Validate donation comment
@@ -74,6 +79,7 @@ const validateForm = () => {
         console.log("Donation comment field is empty.");
     } else {
         console.log("Donation comment:", donationCommentInput.value);
+        return donationCommentInput.value;
     }
 
     return isValid;
