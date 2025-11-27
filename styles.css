@@ -71,3 +71,13 @@ footer {
     padding: 10px;
     background-color: #f0f0f0;
 }
+
+/* iframes */
+iframe {
+    width: 100%;
+    display: block;
+    border: 1px solid #000000;
+    margin: 10px;
+    min-height: 40rem;
+    height: auto;
+}
