@@ -50,11 +50,12 @@ form input {
 }
 
 /* error */
-.error {
+.error , .error-message {
     color: red;
     font-size: 0.9em;
     margin-top: 2px;
     display: block;
+    font-style: italic;
 }
 
 /* Submit button */
@@ -67,7 +68,17 @@ button[type="submit"] {
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 10px;
     padding: 10px;
     background-color: #f0f0f0;
+}
+
+/* iframes */
+iframe {
+    width: 100%;
+    display: block;
+    border: 1px solid #000000;
+    margin: 10px;
+    min-height: 40rem;
+    height: auto;
 }

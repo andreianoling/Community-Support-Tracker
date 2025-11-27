@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer Hours Tracker</title>
+    <title>Community Support Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <header>
         <h1>This is Header.</h1>
     </header>
@@ -19,71 +18,12 @@
             <li>Volunteer Hours Tracker</li>
         </ul>
     </nav>
-
-    <main>
-        <section class="form-section">
-            <form id="donationTracker" aria-label="Donation Tracker Form">
-            <h2>Donation Tracker</h2>
-              <div class="donation-input-container" id="charity-name-container">
-                  <label for="charity-name">Which charity did you donate to?</label>
-                  <input type="text" name="charity-name" id="charity-name" aria-label="Charity Name Input">
-              </div>
-              <div class="donation-input-container" id="donation-amount-container">
-                  <label for="donation-amount">How much did you donate?</label>
-                  <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input">
-              </div>
-              <div class="donation-input-container" id="donation-date-container">
-                  <label for="donation-date">When did you make the donation?</label>
-                  <input type="date" name="donation-date" id="donation-date" aria-label="Donation Date Input">
-              </div>
-              <div class="donation-input-container" id="donation-comment-container">
-                  <label for ="comment">Leave a comment for the donation:</label>
-                  <input type="text" name="comment" id="comment" aria-label="Donation Comment Input">
-              </div>
-              <button type="submit" aria-label="Submit Donation">Submit Donation</button>
-            </form>
-        </section>
-        <section class="form-section">
-            <h2>Log Volunteer Hours</h2>
-
-            <form id="volunteerForm">
-
-                <!-- Charity Name -->
-                <label for="charityName">Charity Name:</label>
-                <input type="text" id="charityName" name="charityName"
-                       aria-label="Enter the name of the charity">
-                <span class="error" id="charityNameError"></span>
-
-                <!-- Hours Volunteered -->
-                <label for="hoursVolunteered">Hours Volunteered:</label>
-                <input type="number" id="hoursVolunteered" name="hoursVolunteered"
-                       aria-label="Enter the number of hours volunteered">
-                <span class="error" id="hoursVolunteeredError"></span>
-
-                <!-- Date -->
-                <label for="volunteerDate">Date of Volunteering:</label>
-                <input type="date" id="volunteerDate" name="volunteerDate"
-                       aria-label="Select the date of volunteering">
-                <span class="error" id="volunteerDateError"></span>
-
-                <!-- Experience Rating 1–5 -->
-                <label for="experienceRating">Experience Rating (1–5):</label>
-                <input type="number" id="experienceRating" name="experienceRating"
-                       aria-label="Rate your volunteer experience from 1 to 5">
-                <span class="error" id="experienceRatingError"></span>
-
-                <button type="submit" aria-label="Submit volunteer hours record">Add Volunteer Record</button>
-
-            </form>
-        </section>
-    </main>
-
+    <iframe src="donations.html"></iframe>
+    <iframe src="volunteerhours.html"></iframe>
     <footer>
         <p>This is footer.</p>
     </footer>
-
-    <!-- Stage One JavaScript file -->
     <script src="styles_part_2.js"></script>
-    <script src ="script.js"></script>
+    <script src ="donation-script.js"></script>
 </body>
 </html>
