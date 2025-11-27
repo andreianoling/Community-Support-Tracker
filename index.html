@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volunteer Hours Tracker</title>
+    <title>Community Support Tracker</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <header>
         <h1>This is Header.</h1>
     </header>
@@ -19,49 +18,12 @@
             <li>Volunteer Hours Tracker</li>
         </ul>
     </nav>
-
-    <main>
-        <section class="form-section">
-            <h2>Log Volunteer Hours</h2>
-
-            <form id="volunteerForm">
-
-                <!-- Charity Name -->
-                <label for="charityName">Charity Name:</label>
-                <input type="text" id="charityName" name="charityName"
-                       aria-label="Enter the name of the charity">
-                <span class="error" id="charityNameError"></span>
-
-                <!-- Hours Volunteered -->
-                <label for="hoursVolunteered">Hours Volunteered:</label>
-                <input type="number" id="hoursVolunteered" name="hoursVolunteered"
-                       aria-label="Enter the number of hours volunteered">
-                <span class="error" id="hoursVolunteeredError"></span>
-
-                <!-- Date -->
-                <label for="volunteerDate">Date of Volunteering:</label>
-                <input type="date" id="volunteerDate" name="volunteerDate"
-                       aria-label="Select the date of volunteering">
-                <span class="error" id="volunteerDateError"></span>
-
-                <!-- Experience Rating 1–5 -->
-                <label for="experienceRating">Experience Rating (1–5):</label>
-                <input type="number" id="experienceRating" name="experienceRating"
-                       aria-label="Rate your volunteer experience from 1 to 5">
-                <span class="error" id="experienceRatingError"></span>
-
-                <button type="submit" aria-label="Submit volunteer hours record">Add Volunteer Record</button>
-
-            </form>
-        </section>
-    </main>
-
+    <iframe src="donations.html"></iframe>
+    <iframe src="volunteerhours.html"></iframe>
     <footer>
         <p>This is footer.</p>
     </footer>
-
-    <!-- Stage One JavaScript file -->
-    <script src="styles_part_2.js"></script>
-
+    <script src="volunteer_hours.js"></script>
+    <script src ="donation-script.js"></script>
 </body>
 </html>
