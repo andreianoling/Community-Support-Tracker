@@ -1,9 +1,12 @@
 {
+  "name": "comp-2330-group-project",
+  "version": "1.0.0",
   "scripts": {
     "test": "jest"
   },
   "devDependencies": {
     "jest": "^29.7.0",
     "jsdom": "^24.1.3"
+
   }
 }
