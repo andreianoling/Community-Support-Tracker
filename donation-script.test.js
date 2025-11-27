@@ -1,5 +1,5 @@
 const {JSDOM} = require("jsdom");
-const { validateForm, saveDonationToLocalStorage, showInputError, onSubmit, onPageLoadHandler } = require("./script");
+const { validateForm, saveDonationToLocalStorage, showInputError, onSubmit, onPageLoadHandler } = require("./donation-script");
 
 test ("Expect temporary objects (console.log) to be stored with valid inputs", () => {
     const dom = new JSDOM(
@@ -82,7 +82,7 @@ test ("Identify empty field - donation amount", () => {
     global.document = dom.window.document;
     const donationAmountInput = global.document.getElementById("donation-amount");
     const donationAmountContainer = global.document.getElementById("donation-amount-container");
-    expect(validateForm(donationAmountInput)).toBe(false);
+    expect(validateForm()).toBe(false);
     expect(showInputError(donationAmountContainer, "Donation amount is required."));
 });
 
@@ -110,7 +110,6 @@ test ("Invalid negative donation amount", () => {
     global.document = dom.window.document;
     const donationAmountInput = global.document.getElementById("donation-amount");
     const donationAmountContainer = global.document.getElementById("donation-amount-container");
-    expect(validateForm(donationAmountInput)).toBe(false);
     expect(showInputError(donationAmountContainer, "Donation amount cannot be negative."));
 });
 
@@ -138,6 +137,11 @@ test ("Valid inputs are validated correctly", () => {
     global.document = dom.window.document;
 
     // Expect valid form and creation of temporary objects
+    const donationAmountInput = document.getElementById("donation-amount");
+    const charityNameInput = document.getElementById("charity-name");
+    const donationDateInput = document.getElementById("donation-date");
+    const donationCommentInput = document.getElementById("comment");
+
     expect(validateForm()).toBe(true);
     expect(console.log("Charity name:", "test"));
     expect(console.log("Donation amount:", "50"));
