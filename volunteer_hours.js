@@ -38,6 +38,66 @@ function validateForm(charityName, hours, date, rating) {
     return isValid;
 }
 
+// Stage Two Start
+
+function loadFromLocalStorage() {
+    const data = localStorage.getItem("volunteerRecords");
+    if (data) {
+        const records = JSON.parse(data);
+        volunteerRecords.length = 0;
+        records.forEach(r => volunteerRecords.push(r));
+        volunteerRecords.forEach((record, index) => addRecordToTable(record, index));
+        updateTotalHours();
+    }
+}
+
+
+function saveToLocalStorage() {
+    localStorage.setItem("volunteerRecords", JSON.stringify(volunteerRecords));
+}
+
+function addRecordToTable(record, index) {
+    const tableBody = document.querySelector("#volunteerTable tbody");
+    const row = document.createElement("tr");
+    row.dataset.index = index;
+
+    row.innerHTML = `
+        <td>${record.charityName}</td>
+        <td>${record.hours}</td>
+        <td>${record.date}</td>
+        <td>${record.rating}</td>
+        <td><button class="deleteBtn">Delete</button></td>
+    `;
+
+    tableBody.appendChild(row);
+
+    row.querySelector(".deleteBtn").addEventListener("click", () => {
+        deleteRecord(index);
+    });
+}
+
+
+function deleteRecord(index) {
+    volunteerRecords.splice(index, 1);
+    saveToLocalStorage();
+    refreshTable();
+}
+
+
+function refreshTable() {
+    const tableBody = document.querySelector("#volunteerTable tbody");
+    tableBody.innerHTML = "";
+    volunteerRecords.forEach((record, index) => addRecordToTable(record, index));
+    updateTotalHours();
+}
+
+
+function updateTotalHours() {
+    const total = volunteerRecords.reduce((sum, r) => sum + r.hours, 0);
+    document.getElementById("totalHours").textContent = total;
+}
+// Stage Two End
+
 function handleSubmit(event) {
     event.preventDefault();
 
@@ -57,6 +117,12 @@ function handleSubmit(event) {
 
     volunteerRecords.push(record);
 
+    // Stage Two Start
+    saveToLocalStorage();
+    addRecordToTable(record, volunteerRecords.length - 1);
+    updateTotalHours();
+    // Stage Two End
+
     document.getElementById("volunteerForm").reset();
 
     console.log("New volunteer record added:", record);
@@ -68,6 +134,18 @@ if (typeof window !== "undefined") {
     if (volunteerForm) {
         volunteerForm.addEventListener("submit", handleSubmit);
     }
+
+    // Stage Two
+    loadFromLocalStorage();
 }
 
-module.exports = { validateForm, handleSubmit, volunteerRecords };
+module.exports = { 
+    validateForm, 
+    handleSubmit, 
+    volunteerRecords,
+    loadFromLocalStorage,
+    saveToLocalStorage,
+    addRecordToTable,
+    deleteRecord,
+    updateTotalHours
+};
