@@ -102,6 +102,7 @@ const saveDonationToLocalStorage = () => {
 
     // Create donation object
     const donation = {
+        id: Date.now(), // Unique ID for each donation
         charityName: charityName,
         amount: donationAmount,
         date: donationDate,
@@ -115,12 +116,65 @@ const saveDonationToLocalStorage = () => {
     donations.push(donation);
 
     // Save updated donations array to localStorage
-    //localStorage.setItem("donations", JSON.stringify(donations));
+    localStorage.setItem("donations", JSON.stringify(donations));
 
     console.log("Donation saved:", donation);
     
+    // Update the table display
+    displayDonations();
+    
     // Return the stored donation object
     return donation;
+}
+
+// Function to display donations in the table
+const displayDonations = () => {
+    const donations = JSON.parse(localStorage.getItem("donations")) || [];
+    const tableBody = document.getElementById("donationTableBody");
+    const noDonationsMessage = document.getElementById("noDonationsMessage");
+    
+    // Clear existing table rows
+    tableBody.innerHTML = "";
+    
+    // Show message if no donations
+    if (donations.length == 0) {
+        noDonationsMessage.style.display = "block";
+        return;
+    }
+    
+    // Remove no donations message if donations exist
+    noDonationsMessage.style.display = "none";
+    
+    // Create a row for each donation
+    donations.forEach((donation) => {
+        const row = document.createElement("tr");
+        
+        row.innerHTML = `
+            <td>${donation.charityName}</td>
+            <td>$${donation.amount}</td>
+            <td>${donation.date}</td>
+            <td>${donation.comment}</td>
+            <td><button class="delete-btn" onclick="deleteDonation(${donation.id})">Delete</button></td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+// Function to delete a donation
+const deleteDonation = (id) => {
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+    
+    // Loop through donations and keep donations that do not match the selected id
+    donations = donations.filter(donation => donation.id !== id);
+    
+    // Write over localStorage without the deleted donation
+    localStorage.setItem("donations", JSON.stringify(donations));
+    
+    console.log("Donation deleted with id:", id);
+    
+    // Refresh the table display
+    displayDonations();
 }
 
 function onPageLoadHandler() {
@@ -128,11 +182,16 @@ function onPageLoadHandler() {
 	if (form) {
 		form.addEventListener("submit", onSubmit);
 	}
+	
+	// Display existing donations when page loads
+	displayDonations();
 }
 
 // Run the handler if in a browser environment
 if (typeof window !== "undefined") {
 	window.onload = onPageLoadHandler;
 } else {
-	module.exports = { validateForm, saveDonationToLocalStorage,showInputError, onSubmit, onPageLoadHandler };
+	module.exports = { validateForm, saveDonationToLocalStorage, showInputError, 
+        onSubmit, onPageLoadHandler, displayDonations, deleteDonation };
 }
+

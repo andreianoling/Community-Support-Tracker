@@ -13,7 +13,7 @@
             </div>
             <div class="donation-input-container" id="donation-amount-container">
                 <label for="donation-amount">How much did you donate?</label>
-                <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input">
+                <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" step="0.01" min="0" aria-label="Donation Amount Input">
             </div>
             <div class="donation-input-container" id="donation-date-container">
                 <label for="donation-date">When did you make the donation?</label>
@@ -26,7 +26,25 @@
             <button type="submit" aria-label="Submit Donation">Submit Donation</button>
         </form>
     </section>
+    
     <section class="form-section">
+        <h2>Donation History</h2>
+        <table id="donationTable" aria-label="Donation History Table">
+            <thead>
+                <tr>
+                    <th>Charity Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="donationTableBody">
+            </tbody>
+        </table>
+        <p id="noDonationsMessage">No donations recorded yet.</p>
+    </section>
+    
     <script src ="donation-script.js"></script>
 </body>
 </html>
