@@ -136,6 +136,9 @@ const displayDonations = () => {
     // Clear existing table rows
     tableBody.innerHTML = "";
     
+    // Update total donations
+    updateTotalDonations();
+    
     // Show message if no donations
     if (donations.length == 0) {
         noDonationsMessage.style.display = "block";
@@ -159,6 +162,22 @@ const displayDonations = () => {
         
         tableBody.appendChild(row);
     });
+}
+
+// Function to calculate and display total donations
+const updateTotalDonations = () => {
+    const donations = JSON.parse(localStorage.getItem("donations")) || [];
+    
+    // Calculate sum of all donation amounts
+    const total = donations.reduce((sum, donation) => {
+        return sum + parseFloat(donation.amount);
+    }, 0); // Let sum start from 0
+    
+    // Update the display with formatted currency
+    const totalAmountElement = document.getElementById("totalAmount");
+    totalAmountElement.textContent = `$${total.toFixed(2)}`;
+    
+    console.log("Total donations updated to:", total);
 }
 
 // Function to delete a donation
@@ -192,6 +211,6 @@ if (typeof window !== "undefined") {
 	window.onload = onPageLoadHandler;
 } else {
 	module.exports = { validateForm, saveDonationToLocalStorage, showInputError, 
-        onSubmit, onPageLoadHandler, displayDonations, deleteDonation };
+        onSubmit, onPageLoadHandler, displayDonations, deleteDonation, updateTotalDonations };
 }
 

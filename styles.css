@@ -118,3 +118,23 @@ iframe {
     text-align: center; 
     color: #777777c4;
 }
+
+/* Total Donations */
+.total-donations {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.total-donations p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+#totalAmount {
+    font-weight: bold;
+    color: #2c5f2d;
+    font-size: 1.5rem;
+}
