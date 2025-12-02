@@ -161,6 +161,7 @@ const displayDonations = () => {
         `;
         
         tableBody.appendChild(row);
+        console.log("New donation added to table")
     });
 }
 
