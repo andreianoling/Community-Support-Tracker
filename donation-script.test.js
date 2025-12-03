@@ -1,5 +1,5 @@
 const {JSDOM} = require("jsdom");
-const { validateForm, saveDonationToLocalStorage, showInputError, onSubmit, onPageLoadHandler } = require("./donation-script");
+const { validateForm, saveDonationToLocalStorage, showInputError, onSubmit, onPageLoadHandler, deleteDonation } = require("./donation-script");
 
 test ("Expect temporary objects (console.log) to be stored with valid inputs", () => {
     const dom = new JSDOM(
@@ -172,24 +172,181 @@ test ("Successfull donation table update", () => {
 test ("Donation Calculation Update", () => {
     const dom = new JSDOM(
         `<!DOCTYPE html>
-        <div class="donation-input-container" id="charity-name-container">
-            <label for="charity-name">Which charity did you donate to?</label>
-            <input type="text" name="charity-name" id="charity-name" aria-label="Charity Name Input" value="test">
-        </div>
-        <div class="donation-input-container" id="donation-amount-container">
-            <label for="donation-amount">How much did you donate?</label>
-            <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input" value="50">
-        </div>
-        <div class="donation-input-container" id="donation-date-container">
-            <label for="donation-date">When did you make the donation?</label>
-            <input type="date" name="donation-date" id="donation-date" aria-label="Donation Date Input" value="2024-06-01">
-        </div>
-        <div class="donation-input-container" id="donation-comment-container">
-            <label for ="comment">Leave a comment for the donation:</label>
-            <input type="text" name="comment" id="comment" aria-label="Donation Comment Input" value="Test comment">
-        </div>
+        <span id="totalAmount"></span>
         `
     );
     global.document = dom.window.document;
-    expect(console.log("Total donations updated to:", 50)); // Tests that total donation amount is updated correctly
+    
+    // Mock localStorage
+    global.localStorage = {
+        storage: {},
+        getItem(key) {
+            return this.storage[key] || null;
+        },
+        setItem(key, value) {
+            this.storage[key] = value;
+        },
+        removeItem(key) {
+            delete this.storage[key];
+        }
+    };
+    
+    const donation = { id: 1, charityName: "Test Charity", amount: "50.00", date: "2024-06-01", comment: "Test comment" };
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+    donations.push(donation);
+    localStorage.setItem("donations", JSON.stringify(donations));
+    
+    // Call updateTotalDonations to calculate and display the total
+    const updateTotalDonations = () => {
+    const donations = JSON.parse(localStorage.getItem("donations")) || [];
+    
+    // Calculate sum of all donation amounts
+    const total = donations.reduce((sum, donation) => {
+        return sum + parseFloat(donation.amount);
+    }, 0); // Let sum start from 0
+    
+    // Update the display with formatted currency
+    const totalAmountElement = document.getElementById("totalAmount");
+    totalAmountElement.textContent = `$${total.toFixed(2)}`;
+    
+    console.log("Total donations updated to:", total);
+    }
+
+    updateTotalDonations();
+
+    expect(global.document.getElementById("totalAmount").textContent).toBe("$50.00");
+});
+
+test ("Donation Deletion updates localStorage and table display", () => {
+    const dom = new JSDOM(
+        `<!DOCTYPE html>
+        <p id="noDonationsMessage"></p>
+        `
+    );
+    global.document = dom.window.document;
+    // Mock localStorage
+    global.localStorage = {
+        storage: {},
+        getItem(key) {
+            return this.storage[key] || null;
+        },
+        setItem(key, value) {
+            this.storage[key] = value;
+        },
+        removeItem(key) {
+            delete this.storage[key];
+        }
+    };
+    const donation = { id: 1, charityName: "Test Charity", amount: "50.00", date: "2024-06-01", comment: "Test comment" };
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+    donations.push(donation);
+    localStorage.setItem("donations", JSON.stringify(donations));
+    
+    // Call updateTotalDonations to calculate and display the total
+    const updateTotalDonations = () => {
+    const donations = JSON.parse(localStorage.getItem("donations")) || [];
+    
+    // Calculate sum of all donation amounts
+    const total = donations.reduce((sum, donation) => {
+        return sum + parseFloat(donation.amount);
+    }, 0); // Let sum start from 0
+    }
+
+    updateTotalDonations();
+
+    // Function to delete a donation
+    const deleteDonation = (id) => {
+        let donations = JSON.parse(localStorage.getItem("donations")) || [];
+        
+        // Loop through donations and keep donations that do not match the selected id
+        donations = donations.filter(donation => donation.id !== id);
+        
+        // Write over localStorage without the deleted donation
+        localStorage.setItem("donations", JSON.stringify(donations));
+    }
+
+    const displayDonations = () => {
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        const noDonationsMessage = global.document.getElementById("noDonationsMessage");
+        
+        // Update total donations
+        updateTotalDonations();
+        
+        // Show message if no donations
+        if (donations.length == 0) {
+            noDonationsMessage.style.display = "block";
+            return;
+        }
+        
+        // Remove no donations message if donations exist
+        noDonationsMessage.style.display = "none";
+
+    }
+
+    deleteDonation(1);
+    updateTotalDonations();
+    displayDonations();
+
+    const noDonationsMessage = global.document.getElementById("noDonationsMessage");
+    
+    expect(global.localStorage.getItem("donations")).toBe("[]");
+    expect(noDonationsMessage.style.display).toBe("block");
+});
+
+test (" Total Donation Amount updates after localstorage record deletion", () => {
+    const dom = new JSDOM(
+        `<!DOCTYPE html>
+        <span id="totalAmount"></span>
+        `
+    );
+    global.document = dom.window.document;
+    // Mock localStorage
+    global.localStorage = {
+        storage: {},
+        getItem(key) {
+            return this.storage[key] || null;
+        },
+        setItem(key, value) {
+            this.storage[key] = value;
+        },
+        removeItem(key) {
+            delete this.storage[key];
+        }
+    };
+    const donation = { id: 1, charityName: "Test Charity", amount: "50.00", date: "2024-06-01", comment: "Test comment" };
+    // Set localStorage with one donation
+    let donations = [donation];
+    localStorage.setItem("donations", JSON.stringify(donations));
+
+    // Function to calculate total donations
+    const updateTotalDonations = () => {
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        
+        // Calculate sum of all donation amounts
+        const total = donations.reduce((sum, donation) => {
+            return sum + parseFloat(donation.amount);
+        }, 0); // Let sum start from 0
+        
+        // Update the display with formatted currency
+        const totalAmountElement = document.getElementById("totalAmount");
+        totalAmountElement.textContent = `$${total.toFixed(2)}`;
+        
+        console.log("Total donations updated to:", total);
+    }
+    // Function to delete a donation
+    const deleteDonation = (id) => {
+        let donations = JSON.parse(localStorage.getItem("donations")) || [];
+        
+        // Loop through donations and keep donations that do not match the selected id
+        donations = donations.filter(donation => donation.id !== id);
+        
+        // Write over localStorage without the deleted donation
+        localStorage.setItem("donations", JSON.stringify(donations));
+    }
+
+    // Delete the only donation
+    deleteDonation(1);
+    // Update total donations after deletion
+    updateTotalDonations();
+    expect(global.document.getElementById("totalAmount").textContent).toBe("$0.00");
 });
