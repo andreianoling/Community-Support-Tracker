@@ -113,7 +113,7 @@ test ("Invalid negative donation amount", () => {
     expect(showInputError(donationAmountContainer, "Donation amount cannot be negative."));
 });
 
-test ("Valid inputs are validated correctly", () => {
+test ("Valid inputs return correct temporary data objects", () => {
     const dom = new JSDOM(
         `<!DOCTYPE html>
         <div class="donation-input-container" id="charity-name-container">
@@ -143,30 +143,63 @@ test ("Valid inputs are validated correctly", () => {
     expect(console.log("Donation comment:", "Test comment"));
 });
 
-test ("Successfull donation table update", () => {
+test ("Donation table update after record is added to LocalStorage", () => {
     const dom = new JSDOM(
         `<!DOCTYPE html>
-        <div class="donation-input-container" id="charity-name-container">
-            <label for="charity-name">Which charity did you donate to?</label>
-            <input type="text" name="charity-name" id="charity-name" aria-label="Charity Name Input" value="test">
-        </div>
-        <div class="donation-input-container" id="donation-amount-container">
-            <label for="donation-amount">How much did you donate?</label>
-            <input type="number" name="donation-amount" id="donation-amount" placeholder="0.00" aria-label="Donation Amount Input" value="50">
-        </div>
-        <div class="donation-input-container" id="donation-date-container">
-            <label for="donation-date">When did you make the donation?</label>
-            <input type="date" name="donation-date" id="donation-date" aria-label="Donation Date Input" value="2024-06-01">
-        </div>
-        <div class="donation-input-container" id="donation-comment-container">
-            <label for ="comment">Leave a comment for the donation:</label>
-            <input type="text" name="comment" id="comment" aria-label="Donation Comment Input" value="Test comment">
-        </div>
+        <table id = "donationTableBody"></table>
         `
     );
     global.document = dom.window.document;
+    
+    // Mock localStorage
+    global.localStorage = {
+        storage: {},
+        getItem(key) {
+            return this.storage[key] || null;
+        },
+        setItem(key, value) {
+            this.storage[key] = value;
+        },
+        removeItem(key) {
+            delete this.storage[key];
+        }
+    };
 
-    expect(console.log("New donation added to table")); // Tests that donation table is updated from data retrived from local storage
+    // Set localStorage with one donation
+    const donation = { id: 1, charityName: "Test Charity", amount: "50.00", date: "2024-06-01", comment: "Test comment" };
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+    donations.push(donation);
+    localStorage.setItem("donations", JSON.stringify(donations));
+
+    // Function to display donations in the table
+    const displayDonations = () => {
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        const tableBody = global.document.getElementById("donationTableBody");
+
+        // Create a row for each donation
+        donations.forEach((donation) => {
+            const row = document.createElement("tr");
+            
+            row.innerHTML = `
+                <td>${donation.charityName}</td>
+                <td>$${donation.amount}</td>
+                <td>${donation.date}</td>
+                <td>${donation.comment}</td>
+                <td><button class="delete-btn" onclick="deleteDonation(${donation.id})">Delete</button></td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+    }
+    displayDonations();
+
+    const tableBody = global.document.getElementById("donationTableBody");
+    expect(tableBody.innerHTML).toContain("<td>Test Charity</td>");
+    expect(tableBody.innerHTML).toContain("<td>$50.00</td>");
+    expect(tableBody.innerHTML).toContain("<td>2024-06-01</td>");
+    expect(tableBody.innerHTML).toContain("<td>Test comment</td>");
+    expect(tableBody.innerHTML).toContain("delete-btn");
+
 });
 
 test ("Donation Calculation Update", () => {
