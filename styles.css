@@ -1,83 +1,314 @@
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f5f5f5;
+    color: #001f5b;
 }
-
 /* Header */
 header {
-    background-color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #001f5b;
+    color: white;
+    position: relative;
+}
+
+header img {
+    height: 60px;
+}
+
+header h1 {
+    margin: 0 20px;
+    flex: 1;
+    font-size: 1.5rem;
+    color: white;
+}
+
+/* hamburger */
+.hamburger {
+    display: none; /* Hide on desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: white;
 }
 
 /* Nav */
 nav {
-    margin: 10px 0;
-    background-color: #e0e0e0;
-    padding: 10px;
+    background-color: #003366;
 }
 
 nav ul {
     list-style: none;
+    margin: 0;
     padding: 0;
     display: flex;
-    gap: 20px;
 }
 
-nav li {
-    display: inline;
-}
-
-/* Main Form */
-.form-section {
-    max-width: 500px;
-    margin: 20px auto;
-}
-
-.form-section h2 {
-    text-align: center;
-}
-
-form label {
-    display: block;
-    margin-top: 10px;
-}
-
-form input {
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-}
-
-/* error */
-.error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 2px;
-    display: block;
-}
-
-/* Submit button */
-button[type="submit"] {
-    margin-top: 15px;
-    padding: 8px 12px;
+nav ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
     cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+nav ul li:hover {
+    background-color: #0059b3;
+}
+
+nav ul li .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* Iframe */
+iframe {
+    width: 100%;
+    border: none;
+    min-height: 400px;
 }
 
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 30px;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #ccc;
+    color: #001f5b;
 }
 
-/* iframes */
-iframe {
-    width: 100%;
+/* media */
+
+@media (max-width: 768px) {
+    /* display hamburger */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Nav modification */
+    nav ul {
+        display: none;
+        flex-direction: column;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        padding: 10px;
+        border-bottom: 1px solid #0059b3;
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Unify font/button/form colors */
+
+input, button, select, textarea {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #0059b3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003366;
+} 
+
+/* Form */
+
+.form-section {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-section h2 {
+    color: #001f5b;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.form-section label {
     display: block;
-    border: 1px solid #000000;
-    margin: 10px;
-    min-height: 40rem;
-    height: auto;
+    margin-bottom: 5px;
+    color: #003366;
+    font-weight: bold;
+}
+
+.form-section input[type="text"],
+.form-section input[type="number"],
+.form-section input[type="date"],
+.form-section textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-section input:focus,
+.form-section textarea:focus {
+    border-color: #0059b3;
+    outline: none;
+}
+
+.form-section button[type="submit"] {
+    background-color: #0059b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-section button[type="submit"]:hover {
+    background-color: #001f5b;
+}
+
+/* Form error message */
+.form-section .error {
+    color: #b30000;
+    font-size: 0.9rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Form Adjustment on media */
+
+@media (max-width: 768px) {
+    .form-section {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .form-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-section input,
+    .form-section textarea,
+    .form-section button[type="submit"] {
+        font-size: 0.95rem;
+    }
+}
+
+/* Volunteer Records */
+.table-section {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.table-section h2 {
+    color: #001f5b;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+#volunteerTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+#volunteerTable th, #volunteerTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+#volunteerTable th {
+    background-color: #003366;
+    color: white;
+}
+
+#volunteerTable tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+#volunteerTable tbody tr:hover {
+    background-color: #e6f0ff;
+}
+
+#volunteerTable button.deleteBtn {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+#volunteerTable button.deleteBtn:hover {
+    background-color: #800000;
+}
+
+/* totalHours */
+#totalHours {
+    font-weight: bold;
+    color: #0059b3;
+}
+
+@media (max-width: 768px) {
+    .table-section {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    #volunteerTable th, #volunteerTable td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    #volunteerTable button.deleteBtn {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+
+    .table-section h2 {
+        font-size: 1.3rem;
+    }
 }

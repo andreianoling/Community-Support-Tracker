@@ -8,22 +8,63 @@
 </head>
 <body>
     <header>
-        <h1>This is Header.</h1>
+        <!-- NEW ADD -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- NEW ADD END -->
+        <img src="image/Pixell_River_Label.png" alt="PIXELL RIVER label">
+        <h1>Community Support Tracker</h1>
     </header>
 
     <nav>
-        <h2>nav</h2>
         <ul>
-            <li>Donation Tracker</li>
-            <li>Volunteer Hours Tracker</li>
+            <li><img src="image/Pixell_River_Icon.png" alt="PIXELL RIVER label" class="icon">Donation Tracker</li>
+            <li><img src="image/Pixell_River_Icon.png" alt="PIXELL RIVER label" class="icon">Volunteer Hours Tracker</li>
         </ul>
     </nav>
     <iframe src="donations.html"></iframe>
     <iframe src="volunteerhours.html"></iframe>
     <footer>
-        <p>This is footer.</p>
+    <p>© 2025 PIXELL RIVER Financial. All rights reserved.</p>
+    <p>Created by Andrei Anoling & Lichao Huang</p>
     </footer>
     <script src="volunteer_hours.js"></script>
     <script src ="donation-script.js"></script>
+    <!-- NEW ADD -->
+    <script>
+        document.querySelector('.hamburger').onclick = () => {
+            document.querySelector('nav ul').classList.toggle('active');
+        };
+    </script>
+
+    <!-- 动态调整 iframe 高度，防止滚动条 -->
+    <script>
+    function resizeIframe(iframe) {
+        try {
+            // 获取子页面内容高度
+            const contentHeight = iframe.contentWindow.document.body.scrollHeight;
+            iframe.style.height = contentHeight + 'px';
+        } catch (err) {
+            console.warn('无法访问 iframe 内容，可能是跨域问题', err);
+        }
+    }
+
+    // 选择所有 iframe
+    const iframes = document.querySelectorAll('iframe');
+
+    iframes.forEach(iframe => {
+        // 页面加载完成时调整高度
+        iframe.onload = () => {
+            resizeIframe(iframe);
+
+            // 如果子页面动态变化，高度定时更新
+            setInterval(() => resizeIframe(iframe), 500);
+        };
+    });
+    </script>
+    <!-- NEW ADD END -->
 </body>
 </html>
