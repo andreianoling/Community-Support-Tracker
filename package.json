@@ -7,6 +7,5 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "jsdom": "^24.1.3"
-
   }
 }
