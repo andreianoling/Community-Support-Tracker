@@ -3,54 +3,46 @@
 ## Design Principles
 - Clean, accessible, and user-friendly interface
 - Consistent spacing and visual hierarchy
-- Mobile-responsive design
+- Mobile-responsive design with hamburger menu
 - Clear error messaging and validation feedback
 
-## Color Palette *possibly subject to change futher down the line*
+## Color Palette
 
 ### Primary Colors 
-- **Background Light Gray**: `#f0f0f0` - Used for header and footer 
-- **Background Medium Gray**: `#e0e0e0` - Used for navigation 
-- **Text Black**: `#000000` - Primary text color
-- **Error Red**: `red` - Validation errors and alerts
+- **Background**: Light gray
+- **Primary Blue**: Darker blue for header, primary text, and headings
+- **Secondary Blue**: Lighter blue for navigation bar and table headers
+- **Accent Blue**: Darker blue similar to primary for buttons, links, and hover states
+- **White**: Form and card backgrounds
+- **Light Gray**: Footer and borders
 
-## Components *possibly subject to change futher down the line*
+### Text Colors
+- **Primary Text**: Primary Blue
+- **White Text**: Header text color
 
-### Forms
-- **Width**: Full width within containers
-- **Box Sizing**: Border-box to include padding in width
-- **Labels**: Block display, appears above inputs
-- **Inputs**: Full width with 5px padding
+## Components
 
 ### Error Messages
 - **Color**: Red
 - **Style**: Italic
 
-### Navigation
-- **Background**: Gray 
-- **Layout**: Horizontal flex list 
-- **Items**: Inline display 
-
 ### iframes
 - **Width**: 100%
-- **Display**: Block
-- **Border**: 1px solid black
 - **Margin**: 10px
-- **Min Height**: 40rem 
-- **Height**: Auto 
+- **Min Height**: 400px 
+- **Height**: 200% 
 
 ### Header & Footer
 - **Background**: Light gray
 - **Alignment**: Center text
 
 ### HTML Organization
-```
 1. Global styles (body)
 2. Layout components (header, nav, footer)
 3. Content sections (donation tracker, volunteer hour tracker)
 4. Interactive elements (buttons, inputs)
 5. State styles (errors, validation)
-```
+
 
 ## Validation & Error Handling
 
