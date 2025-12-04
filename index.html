@@ -8,22 +8,37 @@
 </head>
 <body>
     <header>
-        <h1>This is Header.</h1>
+        <!-- NEW ADD -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- NEW ADD END -->
+        <img src="image/Pixell_River_Label.png" alt="PIXELL RIVER label">
+        <h1>Community Support Tracker</h1>
     </header>
 
     <nav>
-        <h2>nav</h2>
         <ul>
-            <li>Donation Tracker</li>
-            <li>Volunteer Hours Tracker</li>
+            <li><img src="image/Pixell_River_Icon.png" alt="PIXELL RIVER label" class="icon">Donation Tracker</li>
+            <li><img src="image/Pixell_River_Icon.png" alt="PIXELL RIVER label" class="icon">Volunteer Hours Tracker</li>
         </ul>
     </nav>
     <iframe src="donations.html"></iframe>
     <iframe src="volunteerhours.html"></iframe>
     <footer>
-        <p>This is footer.</p>
+    <p>© 2025 PIXELL RIVER Financial. All rights reserved.</p>
+    <p>Created by Andrei Anoling & Lichao Huang</p>
     </footer>
     <script src="volunteer_hours.js"></script>
     <script src ="donation-script.js"></script>
+    <!-- NEW ADD -->
+    <script>
+        document.querySelector('.hamburger').onclick = () => {
+            document.querySelector('nav ul').classList.toggle('active');
+        };
+    </script>
+    <!-- NEW ADD END -->
 </body>
 </html>
