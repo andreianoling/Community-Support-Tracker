@@ -198,6 +198,27 @@ button:hover {
 
 .form-section button[type="submit"]:hover {
     background-color: #001f5b;
+/* error */
+.error , .error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 2px;
+    display: block;
+    font-style: italic;
+}
+
+/* Submit button */
+button[type="submit"] {
+    margin-top: 15px;
+    padding: 8px 12px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
 }
 
 /* Form error message */
@@ -311,4 +332,66 @@ button:hover {
     .table-section h2 {
         font-size: 1.3rem;
     }
+}
+    border: 1px solid #000000;
+    margin: 10px;
+    min-height: 40rem;
+    height: auto;
+}
+
+/* Donation Table */
+#donationTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#donationTable th,
+#donationTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#donationTable th {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.delete-btn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #920000;
+}
+
+#noDonationsMessage {
+    font-style: italic;
+    text-align: center; 
+    color: #777777c4;
+}
+
+/* Total Donations */
+.total-donations {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.total-donations p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+#totalAmount {
+    font-weight: bold;
+    color: #2c5f2d;
+    font-size: 1.5rem;
 }
