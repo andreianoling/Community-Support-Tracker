@@ -79,6 +79,7 @@ nav ul li .icon {
 /* Iframe */
 iframe {
     width: 100%;
+    height: 200%;
     border: none;
     min-height: 400px;
 }
@@ -119,9 +120,9 @@ footer {
     }
 }
 
-/* Unify font/button/form colors */
+/* Unify font/form colors */
 
-input, button, select, textarea {
+input, select, textarea {
     font-family: Arial, sans-serif;
     font-size: 1rem;
     padding: 5px;
@@ -129,18 +130,6 @@ input, button, select, textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
-button {
-    background-color: #0059b3;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #003366;
-} 
 
 /* Form */
 
@@ -335,11 +324,6 @@ footer {
         font-size: 1.3rem;
     }
 }
-    border: 1px solid #000000;
-    margin: 10px;
-    min-height: 40rem;
-    height: auto;
-}
 
 /* Donation Table */
 #donationTable {
@@ -396,4 +380,95 @@ footer {
     font-weight: bold;
     color: #2c5f2d;
     font-size: 1.5rem;
+}
+
+
+
+/* Donation Records */
+.donation-table-section {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 800px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.donation-table-section h2 {
+    color: #001f5b;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+
+#donationTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+
+#donationTable th {
+    background-color: #003366;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+
+#donationTable td {
+    padding: 12px;
+    font-size: 1rem;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+
+#donationTable tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+#donationTable tbody tr:hover {
+    background-color: #e6f0ff;
+}
+
+#donationTable .delete-btn,
+#donationTable button.delete-btn {
+    background-color: #b30000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+#donationTable .delete-btn:hover,
+#donationTable button.delete-btn:hover {
+    background-color:  #800000;
+}
+
+#noDonationsMessage {
+    color: #777;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .donation-table-section {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    #donationTable th, #donationTable td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    #donationTable .delete-btn {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+    }
 }

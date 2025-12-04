@@ -85,13 +85,11 @@ test("all fields valid should submit correctly", () => {
 
 // Stage 2 Tests
 beforeEach(() => {
-    // 清空表格和总时长
     const tableBody = document.querySelector("#volunteerTable tbody");
     if (tableBody) tableBody.innerHTML = "";
     const totalHours = document.getElementById("totalHours");
     if (totalHours) totalHours.textContent = "0";
 
-    // Mock localStorage
     global.localStorage = {
         store: {},
         getItem(key) {
