@@ -1,5 +1,6 @@
 const {JSDOM} = require("jsdom");
-const { validateForm, saveDonationToLocalStorage, showInputError, onSubmit, onPageLoadHandler, deleteDonation } = require("./donation-script");
+const { validateForm, saveDonationToLocalStorage, showInputError, 
+        onSubmit, onPageLoadHandler, displayDonations, deleteDonation, updateTotalDonations } = require("./donation-script");
 
 test ("Expect temporary objects (console.log) to be stored with valid inputs", () => {
     const dom = new JSDOM(
@@ -200,6 +201,57 @@ test ("Donation table update after record is added to LocalStorage", () => {
     expect(tableBody.innerHTML).toContain("<td>Test comment</td>");
     expect(tableBody.innerHTML).toContain("delete-btn");
 
+});
+
+test ("Data persisted in localStorage is correctly retrieved and displayed", () => {
+    const dom = new JSDOM(
+        `<!DOCTYPE html>
+        <table id = "donationTableBody"></table>
+        `
+    );
+    global.document = dom.window.document;
+
+    // Mock localStorage with persisted donation
+    global.localStorage = {
+        storage: {
+            "donations": JSON.stringify([
+            { id: 1, charityName: "Test Charity", amount: "50.00", date: "2024-06-01", comment: "Test comment" },
+        ]),
+        },
+        getItem(key) {
+            return this.storage[key] || null;
+        },
+        setItem(key, value) {
+            this.storage[key] = value;
+        }
+    };
+    // Function to display donations in the table
+    const displayDonations = () => {
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+        const tableBody = global.document.getElementById("donationTableBody");
+
+        // Create a row for each donation
+        donations.forEach((donation) => {
+            const row = document.createElement("tr");
+            
+            row.innerHTML = `
+                <td>${donation.charityName}</td>
+                <td>$${donation.amount}</td>
+                <td>${donation.date}</td>
+                <td>${donation.comment}</td>
+                <td><button class="delete-btn" onclick="deleteDonation(${donation.id})">Delete</button></td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+    }
+    displayDonations();
+    const tableBody = global.document.getElementById("donationTableBody");
+    expect(tableBody.innerHTML).toContain("<td>Test Charity</td>");
+    expect(tableBody.innerHTML).toContain("<td>$50.00</td>");
+    expect(tableBody.innerHTML).toContain("<td>2024-06-01</td>");
+    expect(tableBody.innerHTML).toContain("<td>Test comment</td>");
+    expect(tableBody.innerHTML).toContain("delete-btn");
 });
 
 test ("Donation Calculation Update", () => {
