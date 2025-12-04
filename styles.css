@@ -198,6 +198,8 @@ button:hover {
 
 .form-section button[type="submit"]:hover {
     background-color: #001f5b;
+}
+
 /* error */
 .error , .error-message {
     color: red;
